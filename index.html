@@ -2,30 +2,27 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Hexlet Series – Коллекция сериалов</title>
-
+  <title>Hexlet Series — Мои сериалы</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Hexlet Series — отслеживай просмотренные сериалы и серии.">
-
+  <meta
+    name="description"
+    content="Hexlet Series — веб-приложение для отслеживания просмотренных сериалов."
+  >
   <link rel="icon" href="Image/logo.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="Image/logo.svg">
-
   <link rel="stylesheet" href="style/reset.css">
   <link rel="stylesheet" href="style/style.css">
 </head>
-
 <body>
 
-  <!-- HEADER -->
   <header class="header">
     <div class="container header__inner">
-
       <a href="index.html" class="logo">
-        <img src="Image/logo.svg" alt="Логотип" width="32">
+        <img src="Image/logo.svg" alt="Логотип Hexlet Series" width="32" height="32">
         <span>Hexlet Series</span>
       </a>
 
-      <button class="burger" id="burger">
+      <button class="burger" id="burger" aria-label="Открыть меню">
         <span></span>
         <span></span>
         <span></span>
@@ -33,107 +30,75 @@
 
       <nav class="nav" id="nav">
         <a href="index.html" class="nav__link nav__link--active">Главная</a>
-        <a href="catalog.html" class="nav__link">Каталог</a>
+        <a href="form.html" class="nav__link">Добавить сериал</a>
         <a href="about.html" class="nav__link">О проекте</a>
         <a href="contact.html" class="nav__link">Контакты</a>
-        <button class="header__cta header__cta--mobile">Профиль</button>
       </nav>
-
-      <button class="header__cta header__cta--desktop">Профиль</button>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container hero__inner">
-
-      <div>
-        <div class="hero__badge">
-          <span class="hero__badge-dot"></span>
-          Отмечай просмотренные серии
-        </div>
-
-        <h1 class="hero__title">Моя коллекция сериалов</h1>
-
-        <p class="hero__subtitle">
-          Добавляй сериалы, отслеживай прогресс и сохраняй свои данные.
-        </p>
-
-        <div class="hero__cta-row">
-          <a href="catalog.html" class="btn-primary">Перейти в каталог</a>
-        </div>
-      </div>
-
-      <div class="hero__visual">
-        <article class="hero__card">
-          <div class="hero__image">
-            <img src="Image/image.png" alt="Сериалы">
+  <main>
+    <section class="hero">
+      <div class="container hero__inner">
+        <div>
+          <div class="hero__badge">
+            <span class="hero__badge-dot"></span>
+            Отслеживай просмотренные серии
           </div>
-        </article>
-      </div>
 
-    </div>
-  </section>
-  <!-- КАТАЛОГ НА ГЛАВНОЙ -->
-  <section class="section">
-    <div class="container">
+          <h1 class="hero__title">Мои сериалы</h1>
 
-      <header class="section__header">
-        <div>
-          <h2 class="section__title">Мои сериалы</h2>
-          <p class="section__subtitle">Последние добавленные</p>
+          <p class="hero__subtitle">
+            Добавляй сериалы, отмечай просмотренные эпизоды,
+            сохраняй прогресс и управляй своей коллекцией.
+          </p>
+
+          <div class="hero__cta-row">
+            <a href="form.html" class="btn-primary">Добавить сериал</a>
+          </div>
         </div>
 
-        <a href="catalog.html" class="btn-primary">Открыть каталог</a>
-      </header>
-
-      <div class="products" id="homeSeries"></div>
-
-    </div>
-  </section>
-
-  <!-- ВОЗМОЖНОСТИ -->
-  <section class="section">
-    <div class="container">
-
-      <header class="section__header">
-        <div>
-          <h2 class="section__title">Возможности</h2>
-          <p class="section__subtitle">Что умеет сайт</p>
+        <div class="hero__visual">
+          <article class="hero__card">
+            <div class="hero__image">
+              <img src="Image/image.png" alt="Обложка проекта Hexlet Series">
+            </div>
+            <div class="hero__label">
+              <span class="hero__label-dot"></span>
+              Данные сохраняются в браузере
+            </div>
+          </article>
         </div>
-      </header>
-
-      <div class="benefits">
-
-        <article class="benefit-card">
-          <h3 class="benefit-card__title">Добавление сериалов</h3>
-          <p>Добавляй свои сериалы вручную.</p>
-        </article>
-
-        <article class="benefit-card">
-          <h3 class="benefit-card__title">Прогресс просмотра</h3>
-          <p>Отслеживай просмотренные серии.</p>
-        </article>
-
-        <article class="benefit-card">
-          <h3 class="benefit-card__title">Сохранение</h3>
-          <p>Данные сохраняются в браузере.</p>
-        </article>
-
       </div>
+    </section>
 
-    </div>
-  </section>
+    <section class="section">
+      <div class="container">
+        <header class="section__header">
+          <div>
+            <h2 class="section__title">Каталог сериалов</h2>
+            <p class="section__subtitle">Все добавленные элементы</p>
+          </div>
 
+          <div class="series-counter" id="seriesCounter">Всего сериалов: 0</div>
+        </header>
 
-  <!-- FOOTER -->
+        <div class="products" id="seriesList"></div>
+      </div>
+    </section>
+  </main>
+
   <footer class="footer">
     <div class="container footer__inner">
       <div>© 2026 Hexlet Series</div>
+      <div class="footer__links">
+        <a href="form.html">Добавить</a>
+        <a href="about.html">О проекте</a>
+        <a href="contact.html">Контакты</a>
+      </div>
     </div>
   </footer>
 
-  <!-- SCRIPT -->
-   <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>

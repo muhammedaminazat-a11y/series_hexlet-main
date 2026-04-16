@@ -92,12 +92,15 @@
 ```text
 /
 ├── index.html
-├── catalog.html
+├── form.html
 ├── about.html
 ├── contact.html
 │
 ├── js/
-│   └── script.js
+│   ├── main.js
+│   ├── form.js
+│   ├── storage.js
+│   └── utils.js
 │
 ├── style/
 │   ├── reset.css
@@ -107,8 +110,5 @@
 │   ├── logo.svg
 │   └── image.png
 │
-└── Series/
-    ├── breaking_bad.jpg
-    ├── dark.jpg
-    └── the_witcher.jpg
+└── README.md
 ```

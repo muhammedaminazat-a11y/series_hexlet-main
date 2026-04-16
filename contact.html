@@ -2,9 +2,12 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Контакты – Hexlet Series</title>
+  <title>Hexlet Series — Контакты</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Контакты проекта Hexlet Series.">
+  <meta
+    name="description"
+    content="Контакты проекта Hexlet Series."
+  >
   <link rel="icon" href="Image/logo.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="Image/logo.svg">
   <link rel="stylesheet" href="style/reset.css">
@@ -16,7 +19,7 @@
     <div class="container header__inner">
       <a href="index.html" class="logo">
         <img src="Image/logo.svg" alt="Логотип Hexlet Series" width="32" height="32">
-        <span>HEXLET SERIES</span>
+        <span>Hexlet Series</span>
       </a>
 
       <button class="burger" id="burger" aria-label="Открыть меню">
@@ -27,13 +30,10 @@
 
       <nav class="nav" id="nav">
         <a href="index.html" class="nav__link">Главная</a>
-        <a href="catalog.html" class="nav__link">Каталог</a>
+        <a href="form.html" class="nav__link">Добавить сериал</a>
         <a href="about.html" class="nav__link">О проекте</a>
         <a href="contact.html" class="nav__link nav__link--active">Контакты</a>
-        <button class="header__cta header__cta--mobile" type="button">Профиль</button>
       </nav>
-
-      <button class="header__cta header__cta--desktop" type="button">Профиль</button>
     </div>
   </header>
 
@@ -42,21 +42,19 @@
       <header class="section__header">
         <div>
           <h1 class="section__title">Контакты</h1>
-          <p class="section__subtitle">
-            Форма обратной связи по проекту
-          </p>
+          <p class="section__subtitle">Форма обратной связи</p>
         </div>
       </header>
 
       <form class="contact-form">
-        <input type="text" placeholder="Ваше имя" required>
-        <input type="email" placeholder="Ваш email" required>
-        <textarea placeholder="Ваше сообщение" rows="6" required></textarea>
+        <input type="text" placeholder="Ваше имя">
+        <input type="email" placeholder="Ваш email">
+        <textarea rows="6" placeholder="Ваше сообщение"></textarea>
         <button type="submit" class="btn-primary">Отправить</button>
       </form>
     </div>
   </main>
 
-  <script src="js/script.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>

@@ -1,91 +1,112 @@
-import { getSeries } from './storage.js';
-import { renderEmptyState, createSeriesCard } from './ui.js';
-import { initCatalogPage } from './catalog.js';
+import { getSeries, saveSeries } from './storage.js';
+import { initBurgerMenu, escapeHtml } from './utils.js';
 
 initBurgerMenu();
-initModal();
-initHomeSeries();
-initCatalogPage();
+initIndexPage();
 
-function initBurgerMenu() {
-  const burger = document.getElementById('burger');
-  const nav = document.getElementById('nav');
+function initIndexPage() {
+  const seriesList = document.getElementById('seriesList');
+  const seriesCounter = document.getElementById('seriesCounter');
 
-  if (!burger || !nav) {
+  if (!seriesList || !seriesCounter) {
     return;
   }
 
-  burger.addEventListener('click', () => {
-    burger.classList.toggle('burger--active');
-    nav.classList.toggle('nav--open');
-    document.body.classList.toggle('no-scroll');
-  });
+  renderItems();
 
-  nav.addEventListener('click', (event) => {
-    if (event.target.closest('a') || event.target.closest('button')) {
-      burger.classList.remove('burger--active');
-      nav.classList.remove('nav--open');
-      document.body.classList.remove('no-scroll');
+  function renderItems() {
+    const series = getSeries();
+
+    seriesCounter.textContent = `Всего сериалов: ${series.length}`;
+
+    if (series.length === 0) {
+      seriesList.innerHTML = `
+        <div class="empty-state">
+          <h3>Пока нет сериалов</h3>
+          <p>Нажми «Добавить сериал», чтобы создать первый элемент.</p>
+        </div>
+      `;
+      return;
     }
-  });
-}
 
-function initModal() {
-  const modal = document.getElementById('authModal');
-  const openButtons = document.querySelectorAll('.header__cta');
-  const closeModal = document.getElementById('closeModal');
+    seriesList.innerHTML = '';
 
-  if (!modal || !openButtons.length || !closeModal) {
-    return;
-  }
+    series.forEach(function (item) {
+      const percent = Math.round((item.watched / item.episodes) * 100);
+      const imageSrc = item.image ? item.image : 'Image/image.png';
 
-  openButtons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      modal.classList.add('active');
+      const card = document.createElement('article');
+      card.className =
+        item.completed ? 'product-card product-card--completed' : 'product-card';
+
+      card.innerHTML = `
+        <div class="product-card__image">
+          <img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(item.title)}">
+        </div>
+
+        <div class="product-card__body">
+          <h3 class="product-card__title">${escapeHtml(item.title)}</h3>
+
+          <div class="product-card__meta">
+            <span>${escapeHtml(item.category)}</span>
+            <span class="product-card__price">${item.watched}/${item.episodes}</span>
+          </div>
+
+          <p class="product-card__progress">Прогресс: ${percent}%</p>
+
+          <label class="status-toggle">
+            <input type="checkbox" class="status-checkbox" ${item.completed ? 'checked' : ''}>
+            <span>${item.completed ? 'Просмотрено' : 'Не просмотрено'}</span>
+          </label>
+
+          <button class="product-card__btn product-card__btn--danger js-remove-btn">
+            Удалить
+          </button>
+        </div>
+      `;
+
+      const checkbox = card.querySelector('.status-checkbox');
+      const removeButton = card.querySelector('.js-remove-btn');
+
+      checkbox.addEventListener('change', function () {
+        toggleStatus(item.id);
+      });
+
+      removeButton.addEventListener('click', function () {
+        removeItem(item.id);
+      });
+
+      seriesList.appendChild(card);
     });
-  });
+  }
 
-  closeModal.addEventListener('click', () => {
-    modal.classList.remove('active');
-  });
+  function toggleStatus(id) {
+    const series = getSeries().map(function (item) {
+      if (item.id === id) {
+        return {
+          ...item,
+          completed: !item.completed
+        };
+      }
+      return item;
+    });
 
-  window.addEventListener('click', (event) => {
-    if (event.target === modal) {
-      modal.classList.remove('active');
+    saveSeries(series);
+    renderItems();
+  }
+
+  function removeItem(id) {
+    const isConfirmed = confirm('Удалить сериал?');
+
+    if (!isConfirmed) {
+      return;
     }
-  });
-}
 
-function initHomeSeries() {
-  const homeSeries = document.getElementById('homeSeries');
+    const filteredSeries = getSeries().filter(function (item) {
+      return item.id !== id;
+    });
 
-  if (!homeSeries) {
-    return;
+    saveSeries(filteredSeries);
+    renderItems();
   }
-
-  let data = getSeries();
-
-  if (data.length === 0) {
-    renderEmptyState(homeSeries, 'Пока нет сериалов. Добавьте их в каталоге.');
-    return;
-  }
-
-  data = data.slice(-3).reverse();
-  homeSeries.innerHTML = '';
-
-  data.forEach((item) => {
-    const card = createSeriesCard(
-      item,
-      () => {},
-      () => {}
-    );
-
-    const addButton = card.querySelector('.js-add-episode');
-    const removeButton = card.querySelector('.js-remove-series');
-
-    if (addButton) addButton.remove();
-    if (removeButton) removeButton.remove();
-
-    homeSeries.appendChild(card);
-  });
 }
