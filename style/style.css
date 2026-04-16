@@ -262,6 +262,7 @@ body {
   color: #cbd5e1;
 }
 
+
 .product-card__btn {
   width: 100%;
   border: none;
@@ -316,10 +317,36 @@ body {
   margin-top: 18px;
 }
 
-.link {
-  color: #8b7cff;
+.link-of {
+  color: #f3dcdc;
+  text-decoration: none;
+  touch-action: auto;
+}
+.link-of:hover{
+  color: #6d5dfc;
   text-decoration: underline;
 }
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+.form-input {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #111827;
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
 
 .empty-state {
   text-align: center;
