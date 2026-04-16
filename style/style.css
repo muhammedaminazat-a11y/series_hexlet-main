@@ -316,6 +316,15 @@ body {
 .about-box p + p {
   margin-top: 18px;
 }
+.about-list {
+  margin-top: 12px;
+  padding-left: 20px;
+  color: #cbd5e1;
+}
+
+.about-list li {
+  margin-bottom: 10px;
+}
 
 .link-of {
   color: #f3dcdc;
