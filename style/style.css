@@ -497,7 +497,7 @@ body {
 
 .link {
   color: #6d5dfc;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .link:hover {
