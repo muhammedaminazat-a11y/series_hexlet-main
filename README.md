@@ -112,3 +112,5 @@ hexlet-series/
 │
 └── README.md
 ```
+
+https://muhammedaminazat-a11y.github.io/series_hexlet-main/
